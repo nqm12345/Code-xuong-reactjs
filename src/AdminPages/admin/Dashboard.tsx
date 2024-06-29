@@ -43,7 +43,12 @@ const Dashboard = () => {
           {state.products.map((product: any) => (
             <li className="table-row" key={product.id}>
               <div className="col col-1" data-label="Hình ảnh">
-                <img src={product.image} alt="" width={"100px"} height={"100px"} />
+                <img
+                  src={product.image}
+                  alt=""
+                  width={"100px"}
+                  height={"100px"}
+                />
               </div>
               <div className="col col-2" data-label="ID">
                 {product.id}
