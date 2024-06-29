@@ -1,0 +1,337 @@
+.boxs-ctsp {
+  width: 80%;
+  height: 500px;
+  border: 0px solid rgb(0, 0, 0);
+  margin: 20px 0px 0px 150px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box-ctsps {
+  width: 60%;
+  height: 100%;
+  border: 1px solid #4444;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.box-ctsp2 {
+  width: 40%;
+  height: 100%;
+  border: 0px solid black;
+}
+
+.ctsp-product-name {
+  margin: 50px 0px 0px 150px;
+  display: flex;
+}
+
+.product-name {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 600;
+}
+
+.capacity-version {
+  width: 100%;
+  height: 65px;
+  border: 0px solid black;
+  display: flex;
+  padding: 6px 0px 0px 17.5px;
+}
+
+.capacity-versions {
+  width: 140px;
+  height: 50px;
+  border: 1px solid #4444;
+  border-radius: 5px;
+  text-align: center;
+  margin: 10px 0px 0px 8px;
+  cursor: pointer;
+}
+
+.capacity-versions.active {
+  border: 1px solid brown;
+}
+
+.capacity-price {
+  color: brown;
+}
+
+.ctsp-text-color {
+  width: 100%;
+  height: 80px;
+  border: 0px solid black;
+  margin: 20px 0px 0px 0px;
+}
+
+.text-color {
+  padding: 0px 0px 0px 22px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 600;
+}
+
+.box-color-sps {
+  width: 100%;
+  height: 120px;
+  border: 0px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0px 0px 0px 14px;
+}
+
+.box-color-sp {
+  width: 140px;
+  height: 50px;
+  border: 1px solid #4444;
+  margin-left: 10px;
+  border-radius: 5px;
+  display: flex;
+  cursor: pointer;
+}
+
+.box-color-sp.active {
+  border: 1px solid brown;
+}
+
+.color-sp1 {
+  width: 40%;
+  height: 100%;
+  text-align: center;
+  padding: 10px 0px 0px 0px;
+}
+
+.color-sp2 {
+  width: 60%;
+  height: 100%;
+  padding: 5px 0px 0px 0px;
+}
+
+.text-color-price {
+  font-size: 13px;
+  color: #222;
+}
+
+.price-color {
+  font-size: 13px;
+  color: #222;
+}
+
+.old-new-price {
+  width: 100%;
+  height: 80px;
+  border: 0px solid black;
+  margin: 80px 0px 0px 0px;
+  background-color: #eeeeef;
+  border-radius: 10px;
+  display: flex;
+}
+
+.border-old-new-price1 {
+  width: 200px;
+  height: 65px;
+  border: 0px solid #4444;
+  margin: 8px 0px 0px 22px;
+  border-radius: 5px;
+  transition: 0.2s;
+  display: flex;
+  cursor: pointer;
+}
+
+.border-old-new-price1:hover {
+  background-color: white;
+}
+
+.border-old-new-prices1 {
+  width: 40%;
+  height: 100%;
+  border: 0px solid black;
+}
+
+.border-old-new-prices2 {
+  width: 60%;
+  height: 100%;
+  border: 0px solid black;
+}
+
+.ti-github {
+  font-size: 25px;
+  margin: 20px 0px 0px 16px;
+}
+
+.text-prices2 {
+  font-size: 18px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 600;
+  margin: 15px 0px 0px 0px;
+  color: #222;
+}
+
+.text-prices3 {
+  font-size: 12px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 600;
+  color: #4444;
+}
+
+.border-old-new-price2 {
+  width: 200px;
+  height: 65px;
+  border: 1px solid red;
+  border-radius: 5px;
+  margin: 8px 0px 0px 42px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.new-price {
+  font-size: 18px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 600;
+  color: red;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.old-price {
+  font-size: 16px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: #4444;
+  font-weight: 600;
+}
+
+.button-add-card {
+  width: 300px;
+  height: 65px;
+  border: 1px solid #33cc33;
+  margin: 30px 0px 0px 100px;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: 0.2s;
+  text-align: center;
+  cursor: pointer;
+}
+
+.ti-credit-card {
+  font-size: 20px;
+  color: #33cc33;
+  margin: 10px 0px 0px 0px;
+}
+
+.button-add-card-text {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 18px;
+  color: #33cc33;
+  font-weight: 600;
+}
+
+.button-add-card:hover .ti-credit-card,
+.button-add-card:hover .button-add-card-text {
+  color: #fff;
+}
+
+.button-add-card:hover {
+  background-color: #33cc33;
+  color: #fff;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 60px 0px 0px 0px;
+}
+
+.mySlides {
+  display: none;
+  border: 0px solid black;
+}
+.mySlides > img {
+  width: 100%;
+  height: auto;
+}
+
+.mySlides:first-child {
+  display: block; /* Hiển thị slide đầu tiên khi trang được tải */
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin: -22px 0px 0px -352px; /* Đảm bảo vị trí chính giữa theo chiều dọc */
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.fade {
+  animation: fade 86400s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+table {
+  text-align: center;
+}
+
+form {
+  width: 600px;
+  max-width: 100%;
+  padding: 32px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  margin: 150px 0px 0px 380px;
+}
+.form-group {
+  margin-bottom: 24px;
+}
+
+table {
+  text-align: center;
+}
+
+
+.img-small {
+  margin: 3.5px auto;
+}
