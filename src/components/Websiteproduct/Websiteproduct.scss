@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+.banner {
+  width: 100%;
+  height: 76vh;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  background-color: aliceblue;
+  color: #333;
+  font-family: "Montserrat", sans-serif;
+}
+
+.banner .slider-products {
+  position: absolute;
+  width: 200px;
+  height: 250px;
+  top: 14%;
+  left: calc(50% - 100px);
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  animation: autoRun 20s linear infinite;
+}
+
+@keyframes autoRun {
+  from {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+  }
+  to {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+  }
+}
+
+.banner .slider-products .item {
+  position: absolute;
+  inset: 0 0 0 0;
+  transform: rotateY(
+      calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+    )
+    translateZ(550px);
+}
+
+.banner.slider-products .item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner .content {
+    position: absolute;
+    top: 30%;
+    left: 92%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.banner .content .author {
+    max-width: 200px;
+}
+
+.banner.content h2 {
+    font-size: 3em;
+}
+
+.banner .content .model {
+    background-image: url(../../../public/saitama.png);
+    width: 100%;
+    height: 75vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto 130%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    z-index: 1;
+}

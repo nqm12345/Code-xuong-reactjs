@@ -17,9 +17,9 @@ const PrivateRouter = () => {
     return <div>Loading...</div>;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/login" />;
+  // }
 
   // Kiểm tra xem user có tồn tại và có thuộc tính role hay không
   if (!user || !user.role) {

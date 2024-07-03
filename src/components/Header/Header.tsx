@@ -17,7 +17,7 @@ const Header: React.FC = () => {
       <nav>
         <div className="wrapper">
           <div className="logo">
-            <Link to="/">Logo</Link>
+            <Link to="/">Saitama Shop</Link>
           </div>
           <input type="radio" name="slider" id="menu-btn" />
           <input type="radio" name="slider" id="close-btn" />
@@ -28,75 +28,9 @@ const Header: React.FC = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <a href="#" className="desktop-item">
-                Danh mục
-              </a>
-              <input type="checkbox" id="showMega" />
-              <label htmlFor="showMega" className="mobile-item">
-                Danh mục
-              </label>
-              {/* <div className="mega-box">
-                <div className="content">
-                  <div className="row">
-                    <img
-                      src="https://i.etsystatic.com/39484203/r/il/ee9357/5347357974/il_fullxfull.5347357974_f3d0.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="row">
-                    <header>Design Services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Graphics</a>
-                      </li>
-                      <li>
-                        <a href="#">Vectors</a>
-                      </li>
-                      <li>
-                        <a href="#">Business cards</a>
-                      </li>
-                      <li>
-                        <a href="#">Custom logo</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="row">
-                    <header>Email Services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Personal Email</a>
-                      </li>
-                      <li>
-                        <a href="#">Business Email</a>
-                      </li>
-                      <li>
-                        <a href="#">Mobile Email</a>
-                      </li>
-                      <li>
-                        <a href="#">Web Marketing</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="row">
-                    <header>Security services</header>
-                    <ul className="mega-links">
-                      <li>
-                        <a href="#">Site Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">VPS Hosting</a>
-                      </li>
-                      <li>
-                        <a href="#">Privacy Seal</a>
-                      </li>
-                      <li>
-                        <a href="#">Website design</a>
-                      </ul>
-                    </div>
-                  </div>
-                </div> */}
-            </li>
+         <li>
+          <Link to="/dashboard"> Danh sách sản phẩm</Link>
+         </li>
             <li>
               <Link to="/about">About</Link>
             </li>

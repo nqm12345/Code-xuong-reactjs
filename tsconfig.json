@@ -21,6 +21,6 @@
     },
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/components/ToggleThemeButton"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/components/ToggleThemeButton", "src/components/Websiteproduct"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
