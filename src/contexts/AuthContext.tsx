@@ -1,13 +1,19 @@
-import instance from "@/axios/services";
 import { createContext, useState, useEffect, ReactNode } from "react";
-import { Users } from "@/interfaces/user"; // Import interface Users
+import { Users } from "@/interfaces/user";
+import instance from "@/axios/services";
+import bcrypt from "bcryptjs";
+import { toast } from "react-toastify"; // Import toast từ react-toastify
 
 interface AuthContextType {
   isAuthenticated: boolean;
   user: Users | null;
   loading: boolean;
-  register: (email: string, password: string, fullname: string) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    fullname: string
+  ) => Promise<void>;
+  login: (email: string, password: string) => Promise<string | null>; // Update return type
   logout: () => void;
 }
 
@@ -16,7 +22,7 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
   register: async () => {},
-  login: async () => {},
+  login: async () => null, // Updated return type
   logout: () => {},
 });
 
@@ -30,25 +36,22 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       const token = localStorage.getItem("token");
       if (token) {
         try {
-          const { data } = await instance.get("/users", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
+          const user = JSON.parse(token);
 
-          console.log("API response data:", data); // Kiểm tra dữ liệu trả về từ API
+          // Kiểm tra và lấy lại thông tin người dùng từ API nếu cần thiết
+          const { data } = await instance.get(`/users?email=${user.email}`);
+          const currentUser = data.length > 0 ? data[0] : null;
 
-          const currentUser = data.find((user: Users) => user.role);
           if (currentUser) {
+            // Lưu thông tin người dùng vào state và context
             setUser(currentUser);
             setIsAuthenticated(true);
           } else {
-            console.error("Dữ liệu người dùng không có thuộc tính role hoặc không tìm thấy người dùng");
             setIsAuthenticated(false);
             setUser(null);
           }
         } catch (error) {
-          console.error(error);
+          console.error("Lỗi xác thực người dùng:", error);
           setIsAuthenticated(false);
           setUser(null);
         }
@@ -61,46 +64,92 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     checkAuth();
   }, []);
 
-  const login = async (email: string, password: string) => {
+  const checkEmailExists = async (email: string): Promise<boolean> => {
+    try {
+      const { data } = await instance.get(`/users?email=${email}`);
+      return data.length > 0;
+    } catch (error) {
+      console.error("Lỗi kiểm tra email:", error);
+      return false;
+    }
+  };
+  const login = async (email: string, password: string): Promise<string | null> => {
     setLoading(true);
     try {
-      const { data } = await instance.post("/login", { email, password });
-      console.log("Login response data:", data); // Kiểm tra dữ liệu trả về khi đăng nhập
-
-      if (data.accessToken) {
-        localStorage.setItem("token", data.accessToken);
-        setUser(data.user);
-        setIsAuthenticated(true);
+      const emailExists = await checkEmailExists(email);
+      if (!emailExists) {
+        throw new Error("Email không tồn tại");
+      }
+  
+      const { data } = await instance.get(`/users?email=${email}`);
+  
+      if (data.length > 0) {
+        const user = data[0];
+        const isPasswordCorrect = await comparePassword(password, user.password);
+  
+        if (isPasswordCorrect) {
+          localStorage.setItem("token", JSON.stringify(user));
+          setUser(user);
+          setIsAuthenticated(true);
+          return user.role;
+        } else {
+          throw new Error("Sai mật khẩu");
+        }
       } else {
-        console.error("Không nhận được token hợp lệ từ server");
         setIsAuthenticated(false);
         setUser(null);
+        throw new Error("Sai email hoặc mật khẩu");
       }
-    } catch (error) {
-      console.error("Đăng nhập không thành công:", error);
+    } catch (error: any) { // Định kiểu 'error' là 'any'
+      console.error("Đăng nhập không thành công:", error.message);
+      toast.error(`Đăng nhập không thành công. ${error.message}`);
       setIsAuthenticated(false);
       setUser(null);
+      return null;
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
+  
 
-  const register = async (email: string, password: string, fullname: string) => {
+
+  const register = async (
+    email: string,
+    password: string,
+    fullname: string
+  ): Promise<void> => {
     setLoading(true);
     try {
-      const { data } = await instance.post("/register", { email, password, fullname });
-      console.log("Register response data:", data); // Kiểm tra dữ liệu trả về khi đăng ký
-
-      localStorage.setItem("token", data.accessToken);
-      setUser(data.user);
+      const emailExists = await checkEmailExists(email);
+      if (emailExists) {
+        throw new Error("Email đã tồn tại");
+      }
+  
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const { data } = await instance.post("/users", {
+        email,
+        password: hashedPassword,
+        fullname,
+      });
+  
+      let newUser = { ...data };
+      if (!newUser.role) {
+        newUser = { ...newUser, role: "client" };
+      }
+  
+      localStorage.setItem("token", JSON.stringify(newUser));
+      setUser(newUser);
       setIsAuthenticated(true);
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      console.error("Đăng ký không thành công:", error.message);
+      toast.error(`Đăng ký không thành công. ${error.message}`);
       setIsAuthenticated(false);
       setUser(null);
+      throw error;
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
-
   const logout = () => {
     localStorage.removeItem("token");
     setUser(null);
@@ -108,10 +157,20 @@ const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, loading, register, login, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, user, loading, register, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
 export default AuthContextProvider;
+
+// Hàm so sánh password sử dụng bcrypt
+const comparePassword = async (
+  inputPassword: string,
+  hashedPassword: string
+): Promise<boolean> => {
+  return await bcrypt.compare(inputPassword, hashedPassword);
+};

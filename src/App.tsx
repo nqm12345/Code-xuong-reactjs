@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
-
 import "./App.scss";
-
 import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/Home/Home";
-
 import NotFound from "./pages/NotFound/NotFound";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Dashboard from "./AdminPages/admin/Dashboard";
-
 import AddProduct from "./AdminPages/AddProduct/AddProduct";
 import EditProduct from "./AdminPages/EditProduct/EditProduct";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
-import PrivateRouter from "./components/PrivateRouter/PrivateRouter";
-
+import {
+  AdminPrivateRouter,
+  ClientPrivateRouter,
+} from "./components/PrivateRouter/PrivateRouter";
 import LayoutClient from "./components/LayoutClient/LayoutClient";
 import LayoutAdmin from "./components/LayoutAdmin/LayoutAdmin";
 
@@ -35,17 +33,26 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<LayoutClient />}>
-          <Route path="/dashboard" element={<HomePage />} />
+
+        {/* Client Routes */}
+        <Route element={<LayoutClient />}>
+          <Route index element={<HomePage />} />
           <Route path="/home" element={<Navigate to="/" />} />
           <Route path="/product-detail/:id" element={<ProductDetail />} />
         </Route>
-        <Route path="/admin" element={<PrivateRouter />}>
-          <Route path="/admin" element={<LayoutAdmin />}>
-            <Route path="/admin/product" element={<Dashboard />} />
-            <Route path="/admin/add" element={<AddProduct />} />
-            <Route path="/admin/edit/:id" element={<EditProduct />} />
-          </Route>
+
+        {/* Admin Routes */}
+        <Route path="/admin/*" element={<AdminPrivateRouter />}>
+          <Route index element={<LayoutAdmin />} />
+          <Route path="product" element={<Dashboard />} />
+          <Route path="add" element={<AddProduct />} />
+          <Route path="edit/:id" element={<EditProduct />} />
+        </Route>
+
+        {/* Client Private Routes */}
+        <Route path="/client/*" element={<ClientPrivateRouter />}>
+          <Route element={<LayoutClient />} />
+          {/* Define client-specific routes here if needed */}
         </Route>
 
         <Route path="*" element={<NotFound />} />

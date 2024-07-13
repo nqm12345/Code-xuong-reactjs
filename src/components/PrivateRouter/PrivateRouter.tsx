@@ -1,41 +1,42 @@
-import { AuthContext } from "@/contexts/AuthContext";
-import AccessDenied from "@/pages/AccessDenied/AccessDenied";
+// PrivateRouter.tsx
+
 import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { AuthContext } from "@/contexts/AuthContext";
+import AccessDenied from "@/pages/AccessDenied/AccessDenied";
 
-const PrivateRouter = () => {
-  // console.log("PrivateRouter is rendering");
-
+export const AdminPrivateRouter = () => {
   const { isAuthenticated, user, loading } = useContext(AuthContext);
 
-  // console.log("loading:", loading);
-  // console.log("isAuthenticated:", isAuthenticated);
-  // console.log("User data:", user);
-
   if (loading) {
-    // Hiển thị thông báo hoặc spinner khi đang kiểm tra xác thực
     return <div>Loading...</div>;
   }
 
-  // if (!isAuthenticated) {
-  //   return <Navigate to="/login" />;
-  // }
-
-  // Kiểm tra xem user có tồn tại và có thuộc tính role hay không
-  if (!user || !user.role) {
-    // console.error("Dữ liệu người dùng không hợp lệ");
-    return <AccessDenied />;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
   }
 
-  // console.log("User role:", user.role);
-
-  // Nếu user không phải là admin, từ chối truy cập
-  if (user.role !== "admin") {
-    // console.error("Người dùng không có quyền truy cập");
+  if (!user || user.role !== "admin") {
     return <AccessDenied />;
   }
 
   return <Outlet />;
 };
 
-export default PrivateRouter;
+export const ClientPrivateRouter = () => {
+  const { isAuthenticated, user, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
+
+  if (!user || user.role !== "client") {
+    return <AccessDenied />;
+  }
+
+  return <Outlet />;
+};

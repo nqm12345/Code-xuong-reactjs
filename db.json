@@ -73,16 +73,9 @@
     {
       "title": "Iphone 15 pro",
       "newprice": 1200,
-      "image": "https://res.cloudinary.com/dly4y6gii/image/upload/v1719647109/pngtree-hand-drawn-cartoon-scratching-head-showing-yellow-robot-with-404-error-png-image_4599009_timukw.png",
+      "image": "https://res.cloudinary.com/dly4y6gii/image/upload/v1720846220/nike-zoom-fly-5-premium-white-dx1599-100-0_ycfowq.webp",
       "desc": "Sản phẩm tốt nhất thị trường",
       "id": "OVtnAs5"
-    },
-    {
-      "title": "Iphone 15 plus",
-      "newprice": 1001,
-      "image": "https://res.cloudinary.com/dly4y6gii/image/upload/v1719647292/pngtree-creative-robot-cartoon-png-image_6743154_msxpob.png",
-      "desc": "Sản phẩm tốt nhất thị trường thế giới",
-      "id": "Hr9Hcz8"
     }
   ],
   "users": [
@@ -95,12 +88,42 @@
     {
       "email": "hello@gmail.com",
       "password": "$2a$10$kSTR7CV5u4xEY0rWgDIjFe/Y3DzT307KjpLyNvM9.qsKzDHVafzLW",
-      "id": 2
+      "id": 2,
+      "role": "admin"
     },
     {
       "email": "adminfpt@gmail.com",
       "password": "$2a$10$sk3Zb/3psRCQOYXP4Rq2H.BfyTOadtQ8uQQTxiN.1jump2wR3NvyO",
-      "id": 3
+      "id": 3,
+      "role": "admin"
+    },
+    {
+      "email": "minh1@gmail.com",
+      "password": "$2a$10$a4pyraYpKie76WJl9iwDXeFFuE9vrqtg6QG1i3EwUDpP9PwZe9n36",
+      "fullname": "Minh",
+      "id": 4,
+      "role": "client"
+    },
+    {
+      "email": "client@gmail.com",
+      "password": "$2a$10$yCjfvWYKesB9n4Xr3q9RoOTNOTmC7p.MoLwEVd.fDo70aDXinlDDC",
+      "fullname": "ad",
+      "role": "client",
+      "id": 6
+    },
+    {
+      "email": "admin8@gmail.com",
+      "password": "$2a$10$u1cqMOmIhuac6cDHaoB5K.hSa7Wa6CX..C8CJ5ygu7xXiI/Nktp1G",
+      "fullname": "Admin Be",
+      "role": "admin",
+      "id": 7
+    },
+    {
+      "email": "client8@gmail.com",
+      "password": "$2a$10$GS6MP7w4JmWswukWgp6w1OKIHjqEptr8UmCP8Z8lR1PEOBYXW6hDm",
+      "fullname": "Admin Be",
+      "role": "client",
+      "id": 8
     }
   ]
 }
